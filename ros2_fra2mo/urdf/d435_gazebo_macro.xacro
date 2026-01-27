@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot name="d435_gazebo_macro" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+  
+  <xacro:macro name="d435_gazebo_sensor" params="parent">
+    <xacro:sensor_d435 parent="${parent}" use_nominal_extrinsics="true" add_plug="false" use_mesh="true">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:sensor_d435>
+    <gazebo reference="${parent}">
+      <sensor type="depth_camera" name="depth_camera">
+        <always_on>true</always_on>
+        <update_rate>30.0</update_rate>
+        <camera>
+          <horizontal_fov>1.3962634</horizontal_fov>
+          <image>
+            <format>BGR8</format>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.01</near>
+            <far>100</far>
+          </clip>
+        </camera>
+        <plugin name="GazeboRosDepthCamera" filename="libgazebo_ros_depth_camera.so">
+          <ros>
+            <namespace>/</namespace>
+            <remapping>~/depth/image_raw:=/depth_camera/image_raw</remapping>
+            <remapping>~/depth/camera_info:=/depth_camera/camera_info</remapping>
+            <remapping>~/points:=/depth/points</remapping>
+          </ros>
+          <update_rate>30.0</update_rate>
+          <camera_name>depth_camera</camera_name>
+          <frame_name>camera_depth_optical_frame</frame_name>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+</robot>
+
