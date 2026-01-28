@@ -106,6 +106,6 @@ def generate_launch_description():
  
     ign = [gazebo_ignition, gz_spawn_entity]
     nodes_to_start = [robot_state_publisher_node, joint_state_publisher_node, *ign, bridge, 
-                      odom_tf, ign_clock_bridge]
+                      odom_tf]
 
     return LaunchDescription([SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value = models_path + ':' + os.environ.get('GZ_SIM_RESOURCE_PATH', ''))] + declared_arguments + nodes_to_start)

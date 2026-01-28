@@ -7,6 +7,8 @@ from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import get_package_share_directory
 from launch_ros.actions import Node
+from launch_ros.actions import SetRemap
+from launch.actions import GroupAction
 
 
 def generate_launch_description():
@@ -23,7 +25,7 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value=PathJoinSubstitution([fra2mo_dir, 'maps', 'personal_project_world.yaml']),
+        default_value=PathJoinSubstitution([fra2mo_dir, 'maps', 'map.yaml']),
         description='Full path to map yaml file to load',
     )
 
@@ -37,7 +39,12 @@ def generate_launch_description():
         'use_sim_time', default_value='true', description='Use simulation (Gazebo) clock if true'
     )
 
-    nav2_bringup_launch = IncludeLaunchDescription(
+    nav2_bringup_launch = GroupAction(
+    actions=[
+
+        SetRemap(src='/cmd_vel',dst='/fra2mo/cmd_vel'),
+
+        IncludeLaunchDescription(
         PythonLaunchDescriptionSource([nav2_bringup_launch_file_dir]),
         launch_arguments={
             'map': map_yaml_file,
@@ -45,6 +52,8 @@ def generate_launch_description():
             'use_sim_time': use_sim_time,
         }.items(),
     )
+    ]
+)
     
     # Nodo RViz2
     rviz_node = Node(
