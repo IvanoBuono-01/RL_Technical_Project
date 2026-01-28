@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="iiwa">
+
+    <xacro:arg name="use_sim" default="true" />
+    <xacro:arg name="use_fake_hardware" default="false" />
+    <xacro:arg name="prefix" default="" />
+    <xacro:arg name="robot_ip" default="192.170.10.2" />
+    <xacro:arg name="robot_port" default="30200" />
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+    <xacro:arg name="command_interface" default="position" />
+    
+    <xacro:arg name="description_package" default="iiwa_description" />
+    <xacro:arg name="runtime_config_package" default="iiwa_description" />
+    <xacro:arg name="controllers_file" default="iiwa_controllers.yaml" />
+    <xacro:arg name="namespace" default="/iiwa" />
+
+    <xacro:property name="description_package" value="$(arg description_package)"/>
+
+    <xacro:include filename="$(find ${description_package})/urdf/iiwa.urdf.xacro" />
+    <xacro:include filename="$(find ${description_package})/ros2_control/iiwa.r2c_hardware.xacro" />
+    <xacro:include filename="$(find ${description_package})/gazebo/iiwa.gazebo.xacro"/>
+
+    <link name="world"/>
+    
+    <xacro:iiwa parent="world" prefix="$(arg prefix)">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:iiwa>
+
+    <joint name="gripper_joint" type="revolute">
+      <parent link="tool0"/>
+      <child link="gripper_base"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/> 
+      <limit lower="0" upper="0" effort="1000" velocity="0"/> 
+    </joint>
+
+    <link name="gripper_base">
+      <visual>
+        <origin xyz="0 0 0.02" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.04" length="0.04"/>
+        </geometry>
+        <material name="black">
+          <color rgba="0.1 0.1 0.1 1"/>
+        </material>
+      </visual>
+      
+      <collision name="collision_pinza">
+        <origin xyz="0 0 0.02" rpy="0 0 0"/> 
+        <geometry>
+          <cylinder radius="0.02" length="0.02"/>
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass value="0.2"/>
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+      </inertial>
+    </link>
+
+    <joint name="tip_joint" type="fixed">
+      <parent link="gripper_base"/>
+      <child link="gripper_tip"/>
+      <origin xyz="0 0 0.04" rpy="0 0 0"/> 
+    </joint>
+
+    <link name="gripper_tip">
+      <visual>
+        <geometry><sphere radius="0.01"/></geometry>
+        <material name="red"><color rgba="1 0 0 1"/></material>
+      </visual>
+      <inertial>
+        <mass value="0.1"/> <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+      </inertial>
+    </link>
+
+<gazebo>
+        <plugin filename="libignition-gazebo-detachable-joint-system.so"
+                name="ignition::gazebo::systems::DetachableJoint">
+            
+            <parent_link>gripper_base</parent_link>
+            
+            <child_model>order_can</child_model>
+            <child_model_link>l</child_model_link>
+            
+            <child_link>l</child_link>
+
+            <attach_topic>/iiwa/bar/gripper/attach</attach_topic>
+            <detach_topic>/iiwa/bar/gripper/detach</detach_topic>
+        </plugin>
+    </gazebo>
+    <xacro:iiwa_r2c_hardware
+        name="iiwaRobot" prefix="$(arg prefix)"
+        robot_ip="$(arg robot_ip)" robot_port="$(arg robot_port)"
+        command_interface="$(arg command_interface)"
+        initial_positions_file="$(arg initial_positions_file)"
+        use_sim="$(arg use_sim)" use_fake_hardware="$(arg use_fake_hardware)"
+        />
+
+    <xacro:iiwa_gazebo
+        runtime_config_package="$(arg runtime_config_package)"
+        controllers_file="$(arg controllers_file)"
+        namespace="$(arg namespace)"
+        prefix="$(arg prefix)"
+        />
+
+</robot>
