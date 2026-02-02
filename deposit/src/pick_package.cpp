@@ -189,7 +189,7 @@ private:
     std::vector<double> get_bin_hover_position() {
         // Posizione sopra il cassone (modificare in base alla geometria)
         // Questi sono angles per IIWA, non posizione cartesiana
-        return {0.0, 0.2, 0.0, -1.2, 0.0, 0.8, 0.0};
+        return {0.0, 0.8, 0.0, -1.2, 0.0, 0.8, 0.0};
     }
 
     std::vector<double> get_low_shelf_position() {

@@ -297,6 +297,8 @@
     </joint>
 
 
+    <!-- Plugin camera vecchio - commentato perché ora usiamo il plugin in iiwa.gazebo.xacro -->
+    <!--
     <gazebo reference="${prefix}camera_link">
         <sensor name="${prefix}camera" type="camera">
           <always_on>1</always_on>
@@ -322,7 +324,7 @@
           </camera>
         </sensor>
     </gazebo>
-    
+    -->
 
     <!-- Contact sensor sul gripper_link -->
     <gazebo reference="${prefix}vacuum_gripper_link">
