@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.5">
-  <world name="leonardo_race_field">
+  <world name="personal_project_world">
     
     <physics name='default_physics' default='0' type='ode'>
       <gravity>0 0 -9.8066</gravity>
@@ -173,6 +173,86 @@
     filename="gz-sim-air-pressure-system"
     name="gz::sim::systems::AirPressure">
   </plugin>-->  
+
+  <model name="package1">
+    <pose>-8.30 3.10 0.8 0 0 0</pose>
+    <static>false</static> 
+    <link name="package_link">
+
+      <inertial>
+        <mass>0.1</mass> <inertia>
+          <ixx>0.000027</ixx>
+          <iyy>0.000027</iyy>
+          <izz>0.0000375</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      
+      <collision name="collision">
+        <geometry><box><size>0.1 0.1 0.1</size></box></geometry>
+      </collision>
+      <visual name="visual">
+        <geometry><box><size>0.1 0.1 0.1</size></box></geometry>
+        <material>
+          <ambient>1 0.5 0 1</ambient>
+          <diffuse>1 0.5 0 1</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <include>
+      <uri>model://aruco0</uri>
+      <pose>0 0 0.051 0 0 1.57</pose> 
+    </include>
+
+    <joint name="tag_joint_1" type="fixed">
+      <parent>package_link</parent>
+      <child>aruco0::aruco_link</child> 
+    </joint>
+  
+  </model>
+
+   <model name="package2">
+    <pose>-8.45 3.10 0.8 0 0 0</pose>
+    <static>false</static> 
+    <link name="package_link">
+
+      <inertial>
+        <mass>0.1</mass> <inertia>
+          <ixx>0.000027</ixx>
+          <iyy>0.000027</iyy>
+          <izz>0.0000375</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+
+      </inertial>
+      <collision name="collision">
+        <geometry><box><size>0.1 0.1 0.1</size></box></geometry>
+      </collision>
+      <visual name="visual">
+        <geometry><box><size>0.1 0.1 0.1</size></box></geometry>
+        <material>
+          <ambient>1 0.5 0 1</ambient>
+          <diffuse>1 0.5 0 1</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <include>
+      <uri>model://aruco999</uri>
+      <pose>0 0 0.051 0 0 1.57</pose> 
+    </include>
+
+    <joint name="tag_joint_2" type="fixed">
+      <parent>package_link</parent>
+      <child>aruco999::aruco_link</child> 
+    </joint>
+  
+  </model>
 
   </world>
 </sdf>

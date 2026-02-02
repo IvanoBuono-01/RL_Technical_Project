@@ -2,7 +2,8 @@
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="fra2mo" >
   <xacro:include filename="$(find ros2_fra2mo)/urdf/fra2mo_base_macro.xacro"/>
-  <xacro:include filename="$(find ros2_fra2mo)/urdf/lidar_gazebo_macro.xacro"/> 
+  <xacro:include filename="$(find ros2_fra2mo)/urdf/lidar_gazebo_macro.xacro"/>
+  <xacro:include filename="$(find ros2_fra2mo)/urdf/trailer_macro.xacro"/>
   <!-- <xacro:include filename="$(find ros2_fra2mo)/urdf/d435_gazebo_macro.xacro" />  -->
   
   <xacro:property name="LIDAR" value="True"/>
@@ -10,6 +11,9 @@
   
   <!-- Diff Drive Robot Base -->
   <xacro:fra2mo_base/>
+
+  <!-- Cassone trainato -->
+  <xacro:fra2mo_trailer parent_link="base_link"/>
 
   <!-- LIDAR Sensor--> 
   <xacro:if value="${LIDAR}">

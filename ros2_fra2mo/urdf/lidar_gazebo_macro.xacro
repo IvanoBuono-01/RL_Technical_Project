@@ -42,8 +42,8 @@
                   <horizontal>
                       <samples>640</samples>
                       <resolution>1</resolution>
-                      <min_angle>-3.14</min_angle>
-                      <max_angle>3.14</max_angle>
+                      <min_angle>-1.57</min_angle>
+                      <max_angle>1.57</max_angle>
                   </horizontal>
                   <!--<vertical>
                       <samples>640</samples>
@@ -79,4 +79,3 @@
 
   </xacro:macro>
 </robot>
-

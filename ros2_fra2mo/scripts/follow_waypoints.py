@@ -9,8 +9,8 @@ import yaml
 waypoints = yaml.safe_load('''
 waypoints:
   - position:
-      x: 16.0
-      y: -7.1
+      x: 16.40
+      y: -7.30
       z: 0.0
     orientation:
       x: 0.0

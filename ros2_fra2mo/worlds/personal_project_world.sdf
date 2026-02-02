@@ -173,6 +173,18 @@
     filename="gz-sim-air-pressure-system"
     name="gz::sim::systems::AirPressure">
   </plugin>-->  
+    <include>
+      <uri>
+        model://aruco0
+      </uri>
+      <name>arucotag0</name>
+    </include>
 
+    <include>
+      <uri>
+        model://aruco999
+      </uri>
+      <name>arucotag999</name>
+    </include>
   </world>
 </sdf>

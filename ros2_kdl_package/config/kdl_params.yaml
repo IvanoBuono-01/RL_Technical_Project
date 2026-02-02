@@ -1,0 +1,17 @@
+trajectory_action_client:
+  ros__parameters:
+    cmd_interface: "position"
+    traj_type: "linear"
+    s_type: "trapezoidal"
+
+    # New parameters
+    traj_duration: 10.0
+    acc_duration: 0.5
+    total_time: 10.0
+    trajectory_len: 200
+    Kp: 5.0
+    
+    # End effector target position (x, y, z)
+    end_position_x: 0.316549
+    end_position_y: -0.373371
+    end_position_z: 0.327897

@@ -20,7 +20,7 @@ def generate_launch_description():
 
     gz_model_path = SetEnvironmentVariable(
     name='IGN_GAZEBO_RESOURCE_PATH',
-    value=os.path.join(pkg_deposit, 'models')  # cartella dove ci sono i modelli SDF/DAE/STL
+    value=os.path.join(pkg_deposit, 'models') + ':' + os.path.join(pkg_fra2mo, 'models')
 )
 
 
@@ -130,7 +130,11 @@ def generate_launch_description():
             '/lidar@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
             '/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
             '/camera/image_raw@sensor_msgs/msg/Image@ignition.msgs.Image',
-            '/camera/camera_info@sensor_msgs/msg/CameraInfo@ignition.msgs.CameraInfo'
+            '/camera/camera_info@sensor_msgs/msg/CameraInfo@ignition.msgs.CameraInfo',
+            '/iiwa_camera/image_raw@sensor_msgs/msg/Image@ignition.msgs.Image',
+            '/iiwa_camera/camera_info@sensor_msgs/msg/CameraInfo@ignition.msgs.CameraInfo',
+            '/camera@sensor_msgs/msg/Image@ignition.msgs.Image',
+            '/camera_info@sensor_msgs/msg/CameraInfo@ignition.msgs.CameraInfo',
         ],
         output='screen'
     )
@@ -171,6 +175,63 @@ def generate_launch_description():
         ]
     )
 
+    aruco_node_0 = Node(
+        package='aruco_ros',
+        executable='single',
+        name='aruco_single',
+        output='screen',
+        parameters=[{
+            'marker_id': 0,
+            'marker_size': 0.07,
+            'reference_frame': 'camera_link',
+            'marker_frame': 'aruco_marker',
+            'camera_frame': 'camera_link',
+            #'aruco_dictionary_id': 3
+        }],
+        remappings=[
+        ('/image', '/camera'),
+        ('/camera_info', '/camera_info'),
+        ('/pose', '/aruco_0/pose'),
+        ]
+    )
+
+    aruco_node_999 = Node(
+        package='aruco_ros',
+        executable='single',
+        name='aruco_single',
+        output='screen',
+        parameters=[{
+            'marker_id': 999,
+            'marker_size': 0.07,
+            'reference_frame': 'camera_link',
+            'marker_frame': 'aruco_marker',
+            'camera_frame': 'camera_link',
+            #'aruco_dictionary_id': 3
+        }],
+        remappings=[
+        ('/image', '/camera'),
+        ('/camera_info', '/camera_info'),
+        ('/pose', '/aruco_999/pose')
+        ]
+    )
+
+
+    package_node = Node(
+        package='deposit',
+        executable='pick_package',
+        name='deposit_node',
+        output='screen',
+        parameters=[{
+            "robot_description": robot_description_iiwa,
+            "cmd_interface": 'position'}],
+    )
+
+    delayed_package_node = TimerAction(
+        period=20.0,            # Delay in secondi
+        actions=[package_node]  # Il nodo (o la lista di nodi) da avviare
+    )
+
+
     return LaunchDescription([
         ign_plugin_path,
         gz_model_path,
@@ -183,5 +244,8 @@ def generate_launch_description():
         bridge,
         odom_tf,
         jsb_spawner,
-        iiwa_arm_controller_spawner
+        iiwa_arm_controller_spawner,
+        aruco_node_0,
+        aruco_node_999,
+        delayed_package_node
     ])
