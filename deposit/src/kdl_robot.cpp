@@ -45,7 +45,7 @@ void KDLRobot::setJntLimits(KDL::JntArray &q_low, KDL::JntArray &q_high)
     ikSol_ = new KDL::ChainIkSolverPos_NR_JL(chain_,
                                             *fkSol_,
                                             *ikVelSol_,
-                                            100,1e-6);//Maximum 100 iterations, stop at accuracy 1e-6
+                                            500,1e-6);//Maximum 100 iterations, stop at accuracy 1e-6
     ikSol_->setJointLimits(q_min_,q_max_);
 }
 

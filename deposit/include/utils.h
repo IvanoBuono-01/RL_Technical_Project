@@ -232,7 +232,7 @@ inline Eigen::MatrixXd gradientJointLimits(const Eigen::VectorXd &q, const Eigen
 {
     int n = q.size();
     costValue = 0;
-    double gamma = 100.0;
+    double gamma = 1.0;
     Eigen::VectorXd gradient;
     gradient.resize(n);
 
@@ -258,20 +258,5 @@ inline Eigen::MatrixXd matrixOrthonormalization(Eigen::MatrixXd R){
 
    return R;
 }
-
-// Additional
-#include <geometry_msgs/msg/pose.hpp>
-inline KDL::Frame toKDL(const geometry_msgs::msg::Pose &pose)
-{
-    KDL::Vector p(pose.position.x, pose.position.y, pose.position.z);
-    KDL::Rotation R = KDL::Rotation::Quaternion(
-        pose.orientation.x,
-        pose.orientation.y,
-        pose.orientation.z,
-        pose.orientation.w
-    );
-    return KDL::Frame(R, p);
-}
-
 
 #endif

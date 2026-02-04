@@ -121,6 +121,13 @@
       <uri>model://shelf</uri>
     </include>
 
+    <!-- Package to be picked up -->
+    <include>
+      <name>package</name>
+      <pose>-7.5 2.5 0.5 0 0 0</pose>
+      <uri>model://intruder</uri>
+    </include>
+
     <!-- AR markers -->
     <!--include>
       <name>tool_0_tag</name>

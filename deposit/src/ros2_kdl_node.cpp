@@ -312,11 +312,12 @@ private:
                     }
                     else if(ctrl_ == "velocity_ctrl_null")
                     {
-                        // Null-space velocity control
-                        joint_velocities_cmd_.data = controller_->velocity_ctrl_null(
-                            p_.pos,
-                            Eigen::Vector3d(cartpos.p.data),
-                            Kp_);
+                        // Null-space velocity control - NOT IMPLEMENTED
+                        // joint_velocities_cmd_.data = controller_->velocity_ctrl_null(
+                        //     p_.pos,
+                        //     Eigen::Vector3d(cartpos.p.data),
+                        //     Kp_);
+                        joint_velocities_cmd_.data = Eigen::VectorXd::Zero(7);
                     }
                 }
 
@@ -389,7 +390,13 @@ private:
             // RCLCPP_INFO(this->get_logger(), "Executing %s", ctrl_.c_str());
  
             // Calcola matrice di trasformazione da aruco a image Plane
-            KDL::Frame T_imgP_aruco = toKDL(aruco_msg->pose);
+            // Convert geometry_msgs::Pose to KDL::Frame
+            const auto& pose = aruco_msg->pose;
+            KDL::Frame T_imgP_aruco(
+                KDL::Rotation::Quaternion(pose.orientation.x, pose.orientation.y, 
+                                         pose.orientation.z, pose.orientation.w),
+                KDL::Vector(pose.position.x, pose.position.y, pose.position.z)
+            );
  
             // // matrice di trasformazione da image Plane a camera di tipo Eigen
             // double focal_length = 1.047;
@@ -470,9 +477,11 @@ private:
                 double K_gain = 1;
                 Eigen::MatrixXd K = Eigen::MatrixXd::Identity(n,n)*K_gain;
  
-                joint_velocities_cmd_.data = controller_.vision_control(this->aruco_msg,
-                                                                        chain_,
-                                                                        K);
+                // Vision control - NOT IMPLEMENTED
+                // joint_velocities_cmd_.data = controller_.vision_control(this->aruco_msg,
+                //                                                         chain_,
+                //                                                         K);
+                joint_velocities_cmd_.data = Eigen::VectorXd::Zero(n);
  
                 // double dt = 0.1; // dipende dal timer
                 // for (int i = 0; i < joint_positions_.data.size(); ++i) {

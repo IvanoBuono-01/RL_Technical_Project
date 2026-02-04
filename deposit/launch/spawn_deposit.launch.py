@@ -133,6 +133,7 @@ def generate_launch_description():
             '/camera/camera_info@sensor_msgs/msg/CameraInfo@ignition.msgs.CameraInfo',
             '/iiwa/camera/image_raw@sensor_msgs/msg/Image@ignition.msgs.Image',
             '/iiwa/camera/camera_info@sensor_msgs/msg/CameraInfo@ignition.msgs.CameraInfo',
+            '/world/leonardo_race_field/set_pose@ros_gz_interfaces/srv/SetEntityPose',
         ],
         output='screen'
     )
@@ -184,12 +185,11 @@ def generate_launch_description():
             'reference_frame': 'iiwa_camera_link',
             'marker_frame': 'aruco_marker',
             'camera_frame': 'iiwa_camera_link',
-            #'aruco_dictionary_id': 3
         }],
         remappings=[
-        ('/image', '/camera/image_raw'),
-        ('/camera_info', '/camera/camera_info'),
-        ('/pose', '/aruco_marker_0/pose'),
+            ('/image', '/camera/image_raw'),
+            ('/camera_info', '/camera/camera_info'),
+            ('/pose', '/aruco_marker_0/pose'),
         ]
     )
 
@@ -204,12 +204,11 @@ def generate_launch_description():
             'reference_frame': 'iiwa_camera_link',
             'marker_frame': 'aruco_marker',
             'camera_frame': 'iiwa_camera_link',
-            #'aruco_dictionary_id': 3
         }],
         remappings=[
-        ('/image', '/camera/image_raw'),
-        ('/camera_info', '/camera/camera_info'),
-        ('/pose', '/aruco_marker_999/pose')
+            ('/image', '/camera/image_raw'),
+            ('/camera_info', '/camera/camera_info'),
+            ('/pose', '/aruco_marker_999/pose')
         ]
     )
 

@@ -175,7 +175,7 @@
   </plugin>-->  
 
   <model name="package1">
-    <pose>-8.30 3.10 0.8 0 0 0</pose>
+    <pose>9.17 -4 0.8 0 0 0</pose>
     <static>false</static> 
     <link name="package_link">
 
