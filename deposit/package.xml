@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd"
+            schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+
+  <name>deposit</name>
+  <version>0.0.1</version>
+  <description>
+    Pick and place package for KUKA IIWA using KDL and ArUco detection
+  </description>
+
+  <maintainer email="user@todo.todo">user</maintainer>
+  <license>Apache-2.0</license>
+
+  <!-- ===================== -->
+  <!-- BUILD SYSTEM -->
+  <!-- ===================== -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- ===================== -->
+  <!-- CORE ROS2 -->
+  <!-- ===================== -->
+  <depend>rclcpp</depend>
+  <depend>rclcpp_action</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>trajectory_msgs</depend>
+
+  <!-- Action / KDL package -->
+  <depend>ros2_kdl_package</depend>
+
+  <!-- ===================== -->
+  <!-- ARUCO / VISION -->
+  <!-- ===================== -->
+  <depend>aruco_msgs</depend>
+  <depend>cv_bridge</depend>
+  <depend>image_transport</depend>
+
+  <!-- OpenCV (ROS 2 name) -->
+  <depend>opencv</depend>
+
+  <!-- ===================== -->
+  <!-- GAZEBO / GZ -->
+  <!-- ===================== -->
+  <depend>ros_gz_interfaces</depend>
+  <depend>ros_gz_sim</depend>
+  <depend>ros_gz_bridge</depend>
+
+  <!-- ===================== -->
+  <!-- KDL -->
+  <!-- ===================== -->
+  <depend>orocos_kdl</depend>
+  <depend>kdl_parser</depend>
+
+  <!-- ===================== -->
+  <!-- ROBOT / DESCRIPTION -->
+  <!-- ===================== -->
+  <depend>iiwa_description</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>joint_state_publisher</depend>
+  <depend>ros2_fra2mo</depend>
+
+  <!-- ===================== -->
+  <!-- TESTING -->
+  <!-- ===================== -->
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+
+</package>

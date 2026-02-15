@@ -1,0 +1,18 @@
+# Goal
+float64 traj_duration
+float64 acc_duration
+float64 total_time
+int32   trajectory_len
+float64 kp
+float64 end_position_x
+float64 end_position_y
+float64 end_position_z
+
+---
+# Result
+bool success
+
+---
+# Feedback
+float64 position_error
+

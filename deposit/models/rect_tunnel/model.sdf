@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<sdf version="1.5">
+  <model name="rect_tunnel">
+    <static>true</static>
+
+    <link name="tunnel_link">
+
+      <collision name="roof_collision">
+        <pose>0 0 1.9 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>3.0 2.0 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <collision name="left_wall_collision">
+        <pose>0 0.95 1.0 0 0 0</pose>
+        <geometry>
+          <box>
+            <!-- lunghezza 4 m, spessore 0.1, altezza 2 m -->
+            <size>4.0 0.1 2.0</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <collision name="right_wall_collision">
+        <pose>0 -0.95 1.0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>3.0 0.1 2.0</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="roof_visual">
+        <pose>0 0 1.9 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>3.0 2.0 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1 1 0 1</ambient>
+          <diffuse>1 1 0 1</diffuse>
+        </material>
+      </visual>
+
+      <visual name="left_wall_visual">
+        <pose>0 0.95 1.0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>3.0 0.1 2.0</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1 1 0 1</ambient>
+          <diffuse>1 1 0 1</diffuse>
+        </material>
+      </visual>
+
+      <visual name="right_wall_visual">
+        <pose>0 -0.95 1.0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>3.0 0.1 2.0</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1 1 0 1</ambient>
+          <diffuse>1 1 0 1</diffuse>
+        </material>
+      </visual>
+
+    </link>
+  </model>
+</sdf>

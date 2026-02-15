@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<sdf version="1.5">
+  <model name="shelf">
+    <static>true</static>
+    <pose>0 0 0.85 0 0 0</pose>
+    <link name="shelf_link">
+
+      <!-- Montanti -->
+      <visual name="leg_fl">
+        <pose>-0.45 -0.15 0.3 0 0 0</pose>
+        <geometry><box><size>0.05 0.05 0.6</size></box></geometry>
+      </visual>
+      <visual name="leg_fr">
+        <pose>0.45 -0.15 0.3 0 0 0</pose>
+        <geometry><box><size>0.05 0.05 0.6</size></box></geometry>
+      </visual>
+      <visual name="leg_bl">
+        <pose>-0.45 0.15 0.3 0 0 0</pose>
+        <geometry><box><size>0.05 0.05 0.6</size></box></geometry>
+      </visual>
+      <visual name="leg_br">
+        <pose>0.45 0.15 0.3 0 0 0</pose>
+        <geometry><box><size>0.05 0.05 0.6</size></box></geometry>
+      </visual>
+
+      <!-- Ripiani -->
+      <visual name="shelf_1">
+        <pose>0 0 0.15 0 0 0</pose>
+        <geometry><box><size>1.0 0.3 0.03</size></box></geometry>
+      </visual>
+      <visual name="shelf_2">
+        <pose>0 0 0.35 0 0 0</pose>
+        <geometry><box><size>1.0 0.3 0.03</size></box></geometry>
+      </visual>
+
+
+      <!-- Collisione per i singoli ripiani -->
+      <collision name="collision_shelf_1">
+        <pose>0 0 0.15 0 0 0</pose>
+        <geometry><box><size>1.0 0.3 0.03</size></box></geometry>
+      </collision>
+      <collision name="collision_shelf_2">
+        <pose>0 0 0.35 0 0 0</pose>
+        <geometry><box><size>1.0 0.3 0.03</size></box></geometry>
+      </collision>
+ 
+
+    </link>
+  </model>
+</sdf>
