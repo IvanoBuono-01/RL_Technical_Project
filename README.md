@@ -11,7 +11,7 @@ The project includes:
 
 - **Fra2mo** : a differential-drive robot equipped with *LiDAR* to make possibile the autonomous navigation and mapping;
 
--**KUKA IIWA** : a 7 DoFs industrial manipulator used for item grasping and positioning.
+- **KUKA IIWA** : a 7 DoFs industrial manipulator used for item grasping and positioning.
 
 The goal of this simulation is to exectute a list of singles tasks: navigation to a pre-speficied goal (accomplished by Fra2mo) and pick & place of the items (accomplished by the KUKA IIWA).
 
@@ -38,7 +38,6 @@ ros2 launch ros2_fra2mo fra2mo_explore.launch.py
 
 After the exploration is complete it's necessary to save the generated map:
 
-After the exploration is complete, save the generated map:
 ```shell
 cd ~/ros2_ws/src/ros2_fra2mo/maps/
 ros2 run nav2_map_server map_saver_cli -f personal_project_world
