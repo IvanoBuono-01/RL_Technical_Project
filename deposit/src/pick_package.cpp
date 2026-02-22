@@ -422,11 +422,11 @@ private:
         std::vector<double> joint_angles(7);
         
         joint_angles[0] = 0.0;
-        joint_angles[1] = 0.3;
+        joint_angles[1] = 0.3; + (y * 0.5);  // Leggero offset basato su y
         joint_angles[2] = 0.0;
         joint_angles[3] = -1.7;
         joint_angles[4] = 0.0;
-        joint_angles[5] = 1.1;
+        joint_angles[5] = 1.1 - (z * 0.8);  // Leggero offset basato su z
         joint_angles[6] = 0.0;
         
         return joint_angles;
